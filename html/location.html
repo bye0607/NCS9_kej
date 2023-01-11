@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오시는 길</title>
+    <!-- bootstrap css 5.2.2 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- font awesome 5.15.4 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/common.css">
+    <!-- jquery 1.11.2 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- bootstrap js 5.2.2 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- map style -->
+    <style>
+        .map_markder {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;overflow: hidden;}
+        .map_markder .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+        .map_markder .info:first-child {border: 0;box-shadow: 0px 1px 2px #888;}
+        .map_markder .info .title {padding: 7px 0 0 13px;height: 40px;background: #f9f9f9;border-bottom: 1px solid #ddd;font-size: 20px;font-weight: 600;}
+        .info .title {font-family:'Cairo';font-weight:600;}
+        .info .desc {position: relative;margin: 13px;height: 75px;}
+        .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+        .desc .jibun {color: #888;margin-top: -2px;}
+        .info:after {content: "";position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url(../img/vertex_white.png);}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <!-- header start -->
+        <header class="header navbar navbar-expand-lg " role="navigation">
+            <div class="container">
+                <a href="../index.html" class="navbar-brand"><img src="../img/ej_logo.svg" alt="EJ TRAVEL TRIP"></a>
+                <ul class="tnb nav navbar-nav navbar-right collapse navbar-collapse">
+                    <li class="hidden-sm"><a href="signin.html">로그인</a></li>
+                    <li class="hidden-sm"><a href="signup.html">회원가입</a></li>
+                    <li class="hidden-sm"><a href="#">예약확인/결제</a></li>
+                    <li class="hidden-sm"><a href="faq.html">고객센터</a></li>
+                    <li class="search"><a href="#"><i class="fa fa-search fa-lg"></i></a></li>
+                    <li class="allmenu"><a href="#"><i class="fa fa-bars fa-lg"></i></a></li>
+                </ul>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#gnb">
+                    <i class="fa fa-bars fa-2x"></i>
+                </button>
+            </div>
+            <div class="gnb navbar collapse navbar-collapse mt-2" id="gnb">
+                <div class="container">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item"><a class="nav-link" href="#">해외여행</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">제주/국내여행</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">테마여행</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">자유여행</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">항공</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">호텔</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">현지투어/입장권</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">렌터카</a></li>
+                </ul>
+            </div>
+            </div><!-- /.navbar-collapse -->
+        </header>
+        <!-- header end -->
+        <!-- content start -->
+        <main class="content">
+            <!-- page title start -->
+            <div class="sub_tit d-flex align-items-center">
+                <div class="container">
+                    <h2 class="tit">오시는 길</h2>
+                </div>
+            </div>
+            <nav class="location d-none d-lg-block">
+                <div class="container">
+                    <ol class="breadcrumb justify-content-end align-items-center">
+                        <li class="breadcrumb-item">홈</li>
+                        <li class="breadcrumb-item">회사소개</li>
+                        <li class="breadcrumb-item active">오시는 길</li>
+                    </ol>
+                </div>
+            </nav>
+            <!-- page title end -->
+            <!-- location start -->
+            <div class="content_body">
+                <div class="container">
+                    <div class="map_cont">
+                        <!-- #map에 지도연결 -->
+                        <div id="map"></div> 
+                        <div class="f_left">
+                            <h4 class="title">회사 주소</h4>
+                            <p>서울특별시 가나구 다라마로 1길 234호 EJ TRAVEL TRIP<br>(01234)</p>
+                            <ul>
+                                <li>마케팅&amp;제휴 : crm@ejtraveltrip.com</li>
+                                <li>IR : IR@ejtraveltrip.com</li>
+                                <li>채용 : recruit@ejtraveltrip.com</li>
+                                <li>견학 : whyindia@ejtraveltrip.com</li>
+                            </ul>
+                        </div>
+                        <div class="f_right">
+                            <dl>
+                                <dt><i></i>지하철 이용시</dt>
+                                <dd><span class="blue">1호선 이용시 : </span>신도림역 2번 출구 테크노마트 지하1층 연결</dd>
+                                <dd><span class="green">2호선 이용시 : </span>신도림역 2번 출구 테크노마트 지하1층 연결</dd>
+                            </dl>
+                            <dl>
+                                <dt><i></i>버스 이용시</dt>
+                                <dd>신도림역 1번 출구 하차(지하보도를 이용하여 2번 출구로 이동)</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- location end -->
+        </main>
+        <!-- content end -->
+        <!-- footer start -->
+        <footer class="footer">
+            <div class="fnb">
+                <div class="container">
+                    <nav class="nav nav-pills nav-fill">
+                        <a class="nav-link" href="about.html">회사소개</a>
+                        <a class="nav-link" href="#">이용약관</a>
+                        <a class="nav-link" href="#"><strong>개인정보보호정책</strong></a>
+                        <a class="nav-link" href="#">여행약관</a>
+                        <a class="nav-link" href="#">여행자보험</a>
+                        <a class="nav-link" href="#">마케팅제휴문의</a>
+                        <a class="nav-link" href="#">온라인제휴문의</a>
+                        <a class="nav-link" href="#">여행플래너</a>
+                        <a class="nav-link" href="location.html">오시는길</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer_body">
+                <div class="container">
+                <div class="d-flex flex-wrap flex-sm-row">
+                    <div class="ft_logo pb-3">
+                        <a href="../index.html"><img src="../img/ft_ej_logo.svg" alt="EJ TRAVEL TRIP"></a>
+                    </div>
+                    <div class="info_cont">
+                        <div class="licnese_area">
+                            <span>EJ TRAVEL TRIP</span>
+                            <span>주소 : 우)01234 서울특별시 가나구 다라마로 1길 234호</span>
+                        </div>
+                        <div class="licnese_area">
+                            <span>TEL : 02-123-4567~8</span>
+                            <span>FAX : 02-123-4569</span>
+                            <span>E-MAIL : ejtraveltrip@ejtraveltrip.com</span>
+                        </div>
+                        <div class="copy_area">
+                            <p class="small">※ 부득이한 사정에 의해 여행일정이 변경되는 경우 사전 동의를 받습니다.</p>
+                            <p class="small">※ 개별 항공권, 단품 및 일부 여행상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래등에 대해 책임을 지지 않습니다.</p>
+                            <p class="small">Copyright &copy; 2022 EJ TRAVEL TRIP. All Rights Reserved.</p>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </footer>
+        <!-- footer end -->
+    </div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7dbf30274bfcb5bd2afcd62da0c73c9"></script>
+    <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = { 
+                center: new kakao.maps.LatLng(37.50700, 126.89050), // 지도의 중심좌표
+                level: 4 // 지도의 확대 레벨
+            };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        var imageSrc = '../img/marker.png', // 마커이미지의 주소입니다    
+            imageSize = new kakao.maps.Size(65, 70), // 마커이미지의 크기입니다
+            imageOption = {offset: new kakao.maps.Point(29, 37)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+            markerPosition = new kakao.maps.LatLng(37.50700, 126.89050); // 마커가 표시될 위치입니다
+
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+        position: markerPosition,
+        image: markerImage // 마커이미지 설정 
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);  
+
+        // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        var content = '<div class="map_markder">' + 
+            '    <div class="info">' + 
+            '        <div class="title">EJ TRAVEL TRIP</div>' + 
+            '        <div class="desc">' + 
+            '            <div class="ellipsis">서울특별시 가나구 다라마로 1길 234호</div>' + 
+            '            <div class="jibun ellipsis">(우) 01234 (지번) 다라마동 2181</div>' + 
+            '        </div>' + 
+            '    </div>' +    
+            '</div>';
+
+        // 커스텀 오버레이가 표시될 위치입니다 
+        var position = new kakao.maps.LatLng(37.50700, 126.89050);  
+
+        // 커스텀 오버레이를 생성합니다
+        var customOverlay = new kakao.maps.CustomOverlay({
+            map: map,
+            position: position,
+            content: content,
+            yAnchor: 1 
+        });
+    </script>
+</body>
+</html>

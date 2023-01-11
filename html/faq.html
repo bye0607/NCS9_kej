@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자주하는 질문</title>
+    <!-- bootstrap css 5.2.2 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- font awesome 5.15.4 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/common.css">
+    <!-- jquery 1.11.2 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- bootstrap js 5.2.2 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script>
+        window.onload = function(){
+            //tab - jQuery로 구현
+            //탭영역의 li를 클릭할 때 on클래스 제어
+            $(".faq_tab > li").click(function(){
+                if($(this).hasClass("on") == false){
+                    //선택한 요소에 on 추가
+                    $(this).stop().addClass("on");
+                    //그 외의 형제 요소에 on 제거
+                    $(this).stop().siblings().removeClass("on");
+                } 
+            })
+
+            // //list - javascript로 구현
+            //질문영역 question 변수에 담기
+            var question = document.getElementsByClassName('question');
+            // console.log(question);
+            for(var i = 0; i < question.length; i++){
+                question[i].addEventListener('click', function(e){
+                    //답변영역 answer 변수에 담기
+                    var answer = e.currentTarget.parentElement.getElementsByClassName('answer')[0];
+                    //answer영역의 visibillity 속성값으로 active클래스 제어
+                    if(answer.style.visibility !== 'visible'){
+                        answer.style.visibility = 'visible'
+                        e.currentTarget.parentElement.classList.add('active');
+                    } else if(answer.style.visibility !== 'hidden'){
+                        answer.style.visibility = 'hidden'
+                        e.currentTarget.parentElement.classList.remove('active');
+                    }
+                })
+            } 
+        }
+    </script>
+</head>
+<body>
+    <div class="wrap sub_gray">
+        <!-- header start -->
+        <header class="header navbar navbar-expand-lg " role="navigation">
+            <div class="container">
+                <a href="../index.html" class="navbar-brand"><img src="../img/ej_logo.svg" alt="EJ TRAVEL TRIP"></a>
+                <ul class="tnb nav navbar-nav navbar-right collapse navbar-collapse">
+                    <li class="hidden-sm"><a href="signin.html">로그인</a></li>
+                    <li class="hidden-sm"><a href="signup.html">회원가입</a></li>
+                    <li class="hidden-sm"><a href="#">예약확인/결제</a></li>
+                    <li class="hidden-sm"><a href="faq.html">고객센터</a></li>
+                    <li class="search"><a href="#"><i class="fa fa-search fa-lg"></i></a></li>
+                    <li class="allmenu"><a href="#"><i class="fa fa-bars fa-lg"></i></a></li>
+                </ul>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#gnb">
+                    <i class="fa fa-bars fa-2x"></i>
+                </button>
+            </div>
+            <div class="gnb navbar collapse navbar-collapse mt-2" id="gnb">
+                <div class="container">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item"><a class="nav-link" href="#">해외여행</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">제주/국내여행</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">테마여행</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">자유여행</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">항공</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">호텔</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">현지투어/입장권</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">렌터카</a></li>
+                </ul>
+            </div>
+            </div><!-- /.navbar-collapse -->
+        </header>
+        <!-- header end -->
+        <!-- content start -->
+        <main class="content">
+            <!-- page title start -->
+            <div class="sub_tit d-flex align-items-center">
+                <div class="container">
+                    <h2 class="tit">자주하는 질문</h2>
+                </div>
+            </div>
+            <nav class="location d-none d-lg-block">
+                <div class="container">
+                    <ol class="breadcrumb justify-content-end align-items-center">
+                        <li class="breadcrumb-item">홈</li>
+                        <li class="breadcrumb-item">고객센터</li>
+                        <li class="breadcrumb-item active">자주하는 질문</li>
+                    </ol>
+                </div>
+            </nav>
+            <!-- page title end -->
+            <!-- faq start -->
+            <div class="content_body">
+                <div class="faq">
+                    <div class="container">
+                        <div class="faq_search">
+                            <input type="text" name="hd_sch" id="hd_sch" placeholder="검색어를 입력해주세요">
+                            <label for="hd_sch" class="visually-hidden">검색어입력</label>
+                            <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+                        </div>
+                        <ul class="faq_tab">
+                            <li class="on">ALL</li>
+                            <li>해외여행</li>
+                            <li>자유여행</li>
+                            <li>항공</li>
+                            <li>호텔</li>
+                            <li>현지투어/입장권</li>
+                            <li>렌터카</li>
+                            <li>예약/결제</li>
+                            <li>기타</li>
+                        </ul>
+                        <ul class="faq_list">
+                            <li>
+                                <div class="question">
+                                    <span>Q</span>
+                                    <p>해외여행자 보험이란??</p>
+                                </div>
+                                <div class="answer">
+                                    <div class="text_wrap">
+                                        <span>A</span>
+                                        <p>
+                                            여행도중에 우연히 발생하게 되는 각종 사고 및 질병, 조난 시 구조비용, 휴대품의 도난 손해 등의 보상을 목적으로 하는 보험.
+                                            <br>
+                                            <br>
+                                            해외여행자보험의 실손의료비는 여러 보험사에 중복 계약을 했더라도 중복보상이 안되고 비례보상으로 처리된다.
+                                            <br>
+                                            (단 , 사망보험금은 중복보상 가능)
+                                            <br>
+                                            ( 휴대품 손해, 배상책임도 비례보상으로 처리)
+                                            <br>
+                                            국내에서 상해 및 질병으로 치료 받는경우 발생한 실손의료비에 대해 100% 보상을 받을수 없다. 자기부담금이 설정되어 있어 그만큼의 비용을 제외하고 보상을 받을수 있다.
+                                            <br>
+                                            <br>
+                                            ※자세한 내용은 홈페이지의 보험 약관을 참조하시기 바랍니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="question">
+                                    <span>Q</span>
+                                    <p>취소/변경 절차는 어떻게 되나요?</p>
+                                </div>
+                                <div class="answer">
+                                    <div class="text_wrap">
+                                        <span>A</span>
+                                        <p>
+                                            - 입장권/패스 : 경우 마이페이지에서 취소신청을 한 후 실물 티켓, 바우처일 경우 모두투어 본사로 보내주시면 됩니다.
+                                            <br>
+                                            보내주신 물품 수령후 공지된 취소료를 제외하고 고객님의 계좌로 입금해드립니다.
+                                            <br>
+                                            - 현지투어 : 1234-5678로 취소요청 부탁드립니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="question">
+                                    <span>Q</span>
+                                    <p>여행시 여권유효기간은 얼마나 남아있어야 하나요</p>
+                                </div>
+                                <div class="answer">
+                                    <div class="text_wrap">
+                                        <span>A</span>
+                                        <p>
+                                            여권의 유효기간은 출국일로부터 최소 6개월 이상 남아있어야 합니다.
+                                            <br>
+                                            남은 기간이 6개월 미만인 경우 출국이 가능할수도 있으나,
+                                            <br>
+                                            현지 입국심사시 입국 거절사유가 될수 있습니다.
+                                            <br>
+                                            남은 유효기간이 6개월 미만인 경우 여권을 꼭 재발급 받아 주시기 바랍니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="question">
+                                    <span>Q</span>
+                                    <p>호텔비용 외에 현지에서 부과되는 추가 비용이 있나요?</p>
+                                </div>
+                                <div class="answer">
+                                    <div class="text_wrap">
+                                        <span>A</span>
+                                        <p>
+                                            특정 지역 또는 특정호텔에 숙박료외의 (시티텍스, 리조트피 등)의 추가비용이 발생하는 경우가 있습니다. 추가 비용은 공지된 금액과 다르게 예고 없이 변동이 있을 수 있습니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="question">
+                                    <span>Q</span>
+                                    <p>패키지여행으로 예약하고 현지에서 일행끼리 관광이 되나요?</p>
+                                </div>
+                                <div class="answer">
+                                    <div class="text_wrap">
+                                        <span>A</span>
+                                        <p>
+                                            패키지여행은 기본적으로 그룹으로 움직이는 여행패턴으로 보시면 됩니다.
+                                            <br>
+                                            일행이 모두 함께 같은 일정으로 움직이시기 때문에, 원래 해당일정 자체가 자유일정이 하루 또는 반나절 포함되어있는 경우가 아니라면, 일행끼리의 개별행동은 원칙적으로 불가하십니다.
+                                            <br>
+                                            그럴 경우는 패키지상품보다는 에어텔 등의 개별여행패턴으로 예약하시는것을 권장 합니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="question">
+                                    <span>Q</span>
+                                    <p>E-Ticket이란?</p>
+                                </div>
+                                <div class="answer">
+                                    <div class="text_wrap">
+                                        <span>A</span>
+                                        <p>
+                                            기존 종이항공권(Paper Ticket)대신 전자항공권(Electronic Ticket)으로 발급하여
+                                            <br>
+                                            고객님의 모든 여행정보가 항공사의 시스템에 보관/처리되는 서비스입니다.
+                                            <br>
+                                            <br>
+                                            고객님의 티켓정보가 항공사의 시스템에 전자문서로 보관 되므로 분실의 위험이 없으며 원하시는 e-mail 또는 fax로도 받아보실 수 있습니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="question">
+                                    <span>Q</span>
+                                    <p>좌석 배정은 언제 받을 수 있나요?</p>
+                                </div>
+                                <div class="answer">
+                                    <div class="text_wrap">
+                                        <span>A</span>
+                                        <p>
+                                            항공사별로 좌석 배정이 가능한지 여부가 상이하기 때문에 예약 후 담당자에게 확인 해주시기 바라며, 출발 당일 날은 저희 여행사에서 지정해 드릴수가 없습니다.
+                                            <br>
+                                            공항에 여유있게 도착하시어 항공사 직원에게 요청하시면 최대한 고객님의 편의를 고려하여 좌석배정이 되도록 도와드릴 것입니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="question">
+                                    <span>Q</span>
+                                    <p>회원가입을 해야만 여행상품예약이 가능한가요?</p>
+                                </div>
+                                <div class="answer">
+                                    <div class="text_wrap">
+                                        <span>A</span>
+                                        <p>
+                                            아닙니다. 비회원인 일반고객의 경우에도 여행상품을 예약하실 수 있습니다.
+                                            <br>
+                                            예약버튼 클릭후 로그인 페이지가 나오면 일반고객쪽을 체크하시고,
+                                            <br>
+                                            주민번호와 성명을 넣으신다음 나오는 페이지에서 여행자 정보를 입력하시면 됩니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="question">
+                                    <span>Q</span>
+                                    <p>지금 해외 패키지 상품 예약이 가능한가요?</p>
+                                </div>
+                                <div class="answer">
+                                    <div class="text_wrap">
+                                        <span>A</span>
+                                        <p>
+                                            현재 코로나로 인하여 각 국가별 입국 가능 조건이 상이하며,
+                                            <br>
+                                            사전고지 없이 변경될 수 있습니다.
+                                            <br>
+                                            자세한 사항은 당사 홈페이지 내 ‘국가별 입국규정 안내’를 참고 부탁드립니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="question">
+                                    <span>Q</span>
+                                    <p>세 명이 여행할 경우 함께 방을 쓸 수 있나요? 아니면 방을 두개 써야 하나요?</p>
+                                </div>
+                                <div class="answer">
+                                    <div class="text_wrap">
+                                        <span>A</span>
+                                        <p>
+                                            상품가격 형성시 기본조건이 성인 2인1실 기준입니다. 아동을 동반할경우가 아니라면 성인3명의 경우 보통 한분은 싱글룸을 사용하시는것이 좋습니다. 이 경우 추가요금이 발생할 수 있습니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- faq end -->
+        </main>
+        <!-- content end -->
+        <!-- footer start -->
+        <footer class="footer">
+            <div class="fnb">
+                <div class="container">
+                    <nav class="nav nav-pills nav-fill">
+                        <a class="nav-link" href="about.html">회사소개</a>
+                        <a class="nav-link" href="#">이용약관</a>
+                        <a class="nav-link" href="#"><strong>개인정보보호정책</strong></a>
+                        <a class="nav-link" href="#">여행약관</a>
+                        <a class="nav-link" href="#">여행자보험</a>
+                        <a class="nav-link" href="#">마케팅제휴문의</a>
+                        <a class="nav-link" href="#">온라인제휴문의</a>
+                        <a class="nav-link" href="#">여행플래너</a>
+                        <a class="nav-link" href="location.html">오시는길</a>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer_body">
+                <div class="container">
+                <div class="d-flex flex-wrap flex-sm-row">
+                    <div class="ft_logo pb-3">
+                        <a href="../index.html"><img src="../img/ft_ej_logo.svg" alt="EJ TRAVEL TRIP"></a>
+                    </div>
+                    <div class="info_cont">
+                        <div class="licnese_area">
+                            <span>EJ TRAVEL TRIP</span>
+                            <span>주소 : 우)01234 서울특별시 가나구 다라마로 1길 234호</span>
+                        </div>
+                        <div class="licnese_area">
+                            <span>TEL : 02-123-4567~8</span>
+                            <span>FAX : 02-123-4569</span>
+                            <span>E-MAIL : ejtraveltrip@ejtraveltrip.com</span>
+                        </div>
+                        <div class="copy_area">
+                            <p class="small">※ 부득이한 사정에 의해 여행일정이 변경되는 경우 사전 동의를 받습니다.</p>
+                            <p class="small">※ 개별 항공권, 단품 및 일부 여행상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래등에 대해 책임을 지지 않습니다.</p>
+                            <p class="small">Copyright &copy; 2022 EJ TRAVEL TRIP. All Rights Reserved.</p>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </footer>
+        <!-- footer end -->
+    </div>
+</body>
+</html>
